@@ -29,6 +29,11 @@ class PlayerController extends Controller
      */
     public function store(Request $request)
     {
+        $name = $request->input('name');
+        if(Player::where('name', $name)->exists()) {
+            return redirect()->route('index')->with('error', 'Jogador Existente');
+        }
+
         $player = new Player();
         $player->name = $request->input('name');
         $player->save();
@@ -80,5 +85,9 @@ class PlayerController extends Controller
         $player->save();
 
         return redirect()->route('index');
+    }
+
+    public function exists(String $name): bool {
+        return Player::where('name', $name)->exists();
     }
 }
