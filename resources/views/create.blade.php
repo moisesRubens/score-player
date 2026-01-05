@@ -9,7 +9,7 @@
 
     <style>
         body {
-            background-color: #d9d9d9; /* cor creme */
+            background-color: #e6e6e6; /* cor creme */
         }
     </style>
 </head>
