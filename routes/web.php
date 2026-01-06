@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\PlayerController;
+use App\Http\Controllers\BattleController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', [PlayerController::class, 'index'])->name('index');
@@ -10,3 +11,5 @@ Route::get('/{player}/edit', [PlayerController::class, 'edit'])->name('edit');
 Route::put('/{player}', [PlayerController::class, 'update'])->name('update');
 Route::delete('/{player}', [PlayerController::class, 'destroy'])->name('destroy');
 Route::post('/{player}/add-point', [PlayerController::class, 'addPoint'])->name('addPoint');
+
+Route::resource('partidas', BattleController::class);
