@@ -37,7 +37,7 @@ class PlayerController extends Controller
         $player = new Player();
         $player->name = $request->input('name');
         $player->save();
-        
+
         return redirect()->route('index');
     }
 
