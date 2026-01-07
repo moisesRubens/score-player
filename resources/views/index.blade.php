@@ -7,6 +7,7 @@
     <title>Ranking de Jogadores</title>
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="cdnjs.cloudflare.com">
     <style>
         body {
             background-color: #e6e6e6;
@@ -34,6 +35,46 @@
             height: 60px;
             /* LOGO MAIOR */
             width: auto;
+        }
+
+        /*==Menu de navegação==*/
+        .mobile-menu a{
+            text-decoration: none;
+            color: inherit;
+        }
+
+        .mobile-menu li{
+            list-style: none;
+            padding-right: 2rem;
+            padding-top: 2rem;
+            font-size: 1.1rem;
+            font-weight: 500;
+        }
+
+        .mobile-menu-icon button{
+            border: none;
+            background-color: transparent;
+        }
+
+        .mobile-menu{
+            background-color: aqua;
+            display: flex;
+            justify-content: flex-start;
+            align-items: flex-start;
+            display: none;
+
+            width: 20%;
+            height: 100%;
+
+            position: fixed;
+            right: 0;
+
+            z-index: 999; /* Garante que ela fique na frente de tudo (camada superior) */
+            box-shadow: -5px 0 15px rgba(0,0,0,0.2); /* Sombra para dar profundidade */
+        }
+
+        .open {
+            display: block;
         }
 
         /* Mobile */
@@ -73,13 +114,28 @@
 
 <body>
 
-    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
-        <div class="container-fluid">
-            <a class="navbar-brand" href="#">
-                <img src="{{ asset('img/img.png') }}" alt="Logo" class="navbar-logo">
-            </a>
+    <header>
+        <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+        <!--Logo Marca-->
+            <div class="container-fluid">
+                <a class="navbar-brand" href="#">
+                    <img src="{{ asset('img/img.png') }}" alt="Logo" class="navbar-logo">
+                </a>
+            </div>
+
+            <!--Botão de Menu-->
+            <div class="mobile-menu-icon">
+                <button onclick()="menuShow()"><img src="img/menu_white_36dp.svg" alt="Logo Menu" class="icon-menu"></button>
+            </div>
+        </nav>
+
+        <!--Menu interativo-->
+        <div class="mobile-menu">
+            <ul>
+                <li><a href="#">Time</a></li>
+            </ul>
         </div>
-    </nav>
+    </header>
 
 
     <div class="container py-5">
@@ -158,9 +214,24 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 
     <script>
+        const menuMobile = document.querySelector(".mobile-menu");
+
         function clickSound() {
             const audio = document.getElementById('audio');
             audio.play();
+        }
+
+        /*Função MenuShow()*/
+        function menuShow(){
+            if(menuMobile.classList.contains('open')){
+                menuMobile.classList.remove('open');
+                document.querySelector(".icon-menu").src = "imgs/menu_white_36dp.svg";
+
+            }
+            else{
+                menuMobile.classList.add('open');
+                document.querySelector(".icon-menu").src = "imgs/close_white_36dp.svg";
+            }
         }
     </script>
 </body>
