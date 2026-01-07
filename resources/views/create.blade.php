@@ -22,7 +22,7 @@
         <div class="col-md-6">
             <div class="card shadow-sm">
                 <div class="card-body">
-                    <form action="{{ route('store') }}" method="POST">
+                    <form action="{{ route('players.store') }}" method="POST">
                         @csrf
 
                         <div class="mb-3">
@@ -31,7 +31,7 @@
                         </div>
 
                         <div class="d-flex justify-content-between">
-                            <a href="{{ route('index') }}" class="btn btn-secondary">Voltar</a>
+                            <a href="{{ route('players.index') }}" class="btn btn-secondary">Voltar</a>
                             <button type="submit" class="btn btn-primary">Registrar</button>
                         </div>
                     </form>

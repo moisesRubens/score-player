@@ -30,8 +30,8 @@ class PlayerController extends Controller
     public function store(Request $request)
     {
         $name = $request->input('name');
-        if(Player::where('name', $name)->exists()) {
-            return redirect()->route('index')->with('error', 'Jogador Existente');
+        if($this->exists($name)) {
+            return redirect()->route('index')->with('error', 'Jogador existente');
         }
 
         $player = new Player();
@@ -63,7 +63,15 @@ class PlayerController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        $player = Player::find($id);
+        $player = Player::findOrFail($id);
+
+        $exists = Player::where('name', $request->name)
+                            ->where('id', '!=', $player->id)
+                            ->exists();
+                            
+        if($exists) {
+            return redirect()->route('index')->with('warn', 'Atualize com um nome válido');
+        }
         $player->update($request->all());
 
         return redirect()->route('index');
@@ -90,4 +98,5 @@ class PlayerController extends Controller
     public function exists(String $name): bool {
         return Player::where('name', $name)->exists();
     }
+
 }

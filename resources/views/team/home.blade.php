@@ -134,22 +134,10 @@
         @else
         <p class="text-center mt-4">Nenhum jogador cadastrado ainda.</p>
         @endif
-        <!-- Botão para registrar novo player -->
-        <div class="mb-3 text-center">
-            <a href="{{ route('create') }}" class="btn btn-primary">Registrar-se</a>
-        </div>
+        
     </div>
-
-    <audio id="audio" src="{{ asset('audio/click_sound.mp3') }}" preload="auto"></audio>
     <!-- Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
-
-    <script>
-    function clickSound() {
-        const audio = document.getElementById('audio');
-        audio.play();
-    }
-    </script>
 </body>
 
 </html>
