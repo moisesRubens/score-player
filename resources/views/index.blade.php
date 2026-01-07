@@ -125,7 +125,7 @@
 
                         <!-- Botão adicionar ponto -->
                         <td>
-                            <form onsubmit="clickSound()" action="{{ route('addPoint', $player->id) }}" method="POST">
+                            <form onsubmit="clickSound()" action="{{ route('players.addPoint', $player->id) }}" method="POST">
                                 @csrf
                                 <button type="submit" class="btn btn-primary btn-sm">MDM +1</button>
                             </form>
@@ -133,12 +133,12 @@
 
                         <!-- Botão editar -->
                         <td>
-                            <a href="{{ route('edit', $player->id) }}" class="btn btn-primary btn-sm">Editar</a>
+                            <a href="{{ route('players.edit', $player->id) }}" class="btn btn-primary btn-sm">Editar</a>
                         </td>
 
                         <!-- Botão deletar -->
                         <td>
-                            <form action="{{ route('destroy', $player->id) }}" method="POST">
+                            <form action="{{ route('players.destroy', $player->id) }}" method="POST">
                                 @csrf
                                 @method('DELETE')
                                 <button type="submit" class="btn btn-danger btn-sm">Excluir</button>
@@ -154,7 +154,7 @@
         @endif
         <!-- Botão para registrar novo player -->
         <div class="mb-3 text-center">
-            <a href="{{ route('create') }}" class="btn btn-primary">Registrar-se</a>
+            <a href="{{ route('players.create') }}" class="btn btn-primary">Registrar-se</a>
         </div>
     </div>
 
