@@ -104,7 +104,7 @@
         </div>
         @endif
 
-        @if($players->isNotEmpty())
+        @if($performance->isNotEmpty())
         <div class="table-responsive">
             <table class="table table-striped table-bordered align-middle text-center">
                 <thead class="table-dark">
@@ -112,29 +112,38 @@
                         <th>Jogador</th>
                         <th>Kills</th>
                         <th>Média de Kills</th>
-                        <th>Sobrevivência</th>
                         <th>Média de Sobrevivência</th>
                         <th>Partidas</th>
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach($players as $player)
-                    <tr>
-                        <td>{{ $player->player->name }}</td>
-                        <td>{{ $player->individual_kills }}</td>
-                        <td></td>
-                        <td> {{ $player->individual_survive }} </td>
-                        <td></td>
-                        <td> {{ $player->player->matches_amount }} </td>
-                    </tr>
-                    @endforeach
-                </tbody>
+@foreach($performance as $player)
+<tr>
+    <td>{{ $player->name }}</td>
+
+    <td>{{ $player->kills }}</td>
+
+    <td>
+        {{ $player->matches_amount > 0
+            ? number_format($player->kills / $player->matches_amount, 2)
+            : 0 }}
+    </td>
+
+    <td>{{ number_format($player->average_survive, 2) }}</td>
+
+    <td>{{ $player->matches_amount }}</td>
+</tr>
+@endforeach
+</tbody>
+
             </table>
         </div>
         @else
         <p class="text-center mt-4">Nenhum jogador cadastrado ainda.</p>
         @endif
-        
+        <div class="mb-3 text-center">
+            <a href="{{ route('partidas.create') }}" class="btn btn-primary">Adicionar</a>
+        </div>
     </div>
     <!-- Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
