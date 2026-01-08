@@ -38,6 +38,8 @@
         }
 
         /*==Menu de navegação==*/
+
+
         .mobile-menu a{
             text-decoration: none;
             color: inherit;
@@ -79,13 +81,25 @@
 
         /* Mobile */
         @media (max-width: 768px) {
+            h1 {
+                /*REMOVER ISSO DEPOIS*/
+                color: green;
+            }
+
             .navbar-logo {
                 height: 60px;
                 margin: 0 auto;
             }
 
+            
+            /*MENU MOBILE -> RESPONSIVO AO CELULAR*/
             .navbar {
                 padding-left: 0;
+                flex-wrap: nowrap;
+            }
+
+            .mobile-menu{
+                width: 50%;
             }
 
             .a {
@@ -125,7 +139,7 @@
 
             <!--Botão de Menu-->
             <div class="mobile-menu-icon">
-                <button onclick()="menuShow()"><img src="img/menu_white_36dp.svg" alt="Logo Menu" class="icon-menu"></button>
+                <button onclick=menuShow()><img  class="icon-menu" src="img/menu_white_36dp.svg" alt="Logo Menu"></button>
             </div>
         </nav>
 
@@ -214,7 +228,6 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 
     <script>
-        const menuMobile = document.querySelector(".mobile-menu");
 
         function clickSound() {
             const audio = document.getElementById('audio');
@@ -223,14 +236,16 @@
 
         /*Função MenuShow()*/
         function menuShow(){
+            let menuMobile = document.querySelector(".mobile-menu");
+
             if(menuMobile.classList.contains('open')){
                 menuMobile.classList.remove('open');
-                document.querySelector(".icon-menu").src = "imgs/menu_white_36dp.svg";
+                document.querySelector(".icon-menu").src = "img/menu_white_36dp.svg";
 
             }
             else{
                 menuMobile.classList.add('open');
-                document.querySelector(".icon-menu").src = "imgs/close_white_36dp.svg";
+                document.querySelector(".icon-menu").src = "img/close_white_36dp.svg";
             }
         }
     </script>
