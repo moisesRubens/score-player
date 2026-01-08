@@ -9,7 +9,7 @@
 
     <style>
         body {
-            background-color: #d9d9d9; /* cor creme */
+            background-color: #e6e6e6; /* cor creme */
         }
     </style>
 </head>
@@ -23,7 +23,7 @@
             <div class="card shadow-sm">
                 <div class="card-body">
                     <!-- Form de edição -->
-                    <form action="{{ route('update', $player->id) }}" method="POST">
+                    <form action="{{ route('players.update', $player->id) }}" method="POST">
                         @csrf
                         @method('PUT')
 
@@ -40,7 +40,7 @@
                         </div>
 
                         <div class="d-flex justify-content-between">
-                            <a href="{{ route('index') }}" class="btn btn-secondary">Voltar</a>
+                            <a href="{{ route('players.index') }}" class="btn btn-secondary">Voltar</a>
                             <button type="submit" class="btn btn-primary">Atualizar</button>
                         </div>
                     </form>
