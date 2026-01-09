@@ -9,64 +9,58 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
     <style>
     body {
-        background-color: #e6e6e6;
-        /* cor creme */
-    }
+    background-color: #e6e6e6;
+}
 
-    .navbar-brand {
-        padding-left: 0;
-        padding-right: 0;
-    }
+/* NAVBAR */
+.navbar {
+    padding: 0.5rem 0.75rem;
+}
 
-    .navbar-brand span {
-        color: white;
-        font-weight: bold;
-        margin-left: 6px;
-    }
+.navbar-logo {
+    height: 56px;
+    width: auto;
+}
 
-    .navbar {
-        padding-top: 0.25rem;
-        padding-bottom: 0.25rem;
-        max-height: 70px;
-    }
+/* TABLE */
+table {
+    font-size: 14px;
+}
 
+.btn {
+    width: 200px;
+}
+
+/* MOBILE */
+@media (max-width: 768px) {
     .navbar-logo {
-        height: 60px;
-        /* LOGO MAIOR */
-        width: auto;
+        height: 42px;
     }
 
-    /* Mobile */
-    @media (max-width: 768px) {
-        .navbar-logo {
-            height: 60px;
-            margin: 0 auto;
-        }
-
-        .navbar {
-            padding-left: 0;
-        }
-
-        .a {
-            margin: 0 auto;
-            text-align: center;
-        }
-
-        table {
-            font-size: 12px;
-        }
-
-        th,
-        td {
-            padding: 6px 4px;
-            white-space: normal;
-        }
-
-        .btn {
-            padding: 2px 6px;
-            font-size: 11px;
-        }
+    table {
+        font-size: 12px;
     }
+
+    th,
+    td {
+        padding: 6px 4px;
+        white-space: nowrap;
+    }
+
+    .btn {
+        font-size: 12px;
+        padding: 6px 10px;
+        display: block;
+        width: 50%;
+        margin: 0 auto;
+    }
+
+    .mb-3.text-center {
+        display: grid;
+        gap: 8px;
+    }
+}
+
     </style>
 
 </head>
@@ -143,6 +137,9 @@
         @endif
         <div class="mb-3 text-center">
             <a href="{{ route('partidas.create') }}" class="btn btn-primary">Adicionar</a>
+        </div>
+        <div class="mb-3 text-center">
+            <a href="{{ route('players.index') }}" class="btn btn-primary">Voltar</a>
         </div>
     </div>
     <!-- Bootstrap JS -->
