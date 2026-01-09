@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Battle;
+use App\Models\Player;
 use Illuminate\Http\Request;
 use App\Models\PlayerPerformance;
 
@@ -13,8 +14,8 @@ class BattleController extends Controller
      */
     public function index()
     {
-        $players = PlayerPerformance::orderBy('individual_kills')->get();
-        return view('team.home', compact('players'));
+        $performance = Player::all();
+        return view('team.home', compact('performance'));
     }
 
     /**
@@ -22,16 +23,53 @@ class BattleController extends Controller
      */
     public function create()
     {
-        //
+        $players = Player::all();
+        return view('team.create', compact('players'));
     }
 
     /**
      * Store a newly created resource in storage.
      */
     public function store(Request $request)
-    {
-        //
-    }
+{
+    
+        $playersData = $request->players;
+        $totalKills = array_sum(array_column($playersData, 'kills'));
+        $surviveTime = max(array_column($playersData, 'survival_minutes'));
+
+        $battle = Battle::create([
+            'score' => $request->score,
+            'placing' => $request->placing,
+            'map' => $request->map,
+            'total_kills' => $totalKills,
+            'survive_time' => $surviveTime
+        ]);
+
+    // Loop through players
+        foreach ($request->players as $playerData) {
+            $player = Player::find($playerData['id']);
+            if (!$player) continue; // Skip if player not found
+
+            // Update cumulative stats
+            $player->kills += $playerData['kills'];
+            $player->average_survive = 
+                ($player->average_survive * $player->matches_amount + $playerData['survival_minutes'])
+                / ($player->matches_amount + 1);
+            $player->matches_amount++;
+            $player->save();
+
+            // Save the performance in pivot table
+            PlayerPerformance::create([
+                'match_id' => $battle->id,
+                'player_id' => $player->id,
+                'kills' => $playerData['kills'],
+                'individual_survive' => $playerData['survival_minutes'],
+            ]);
+        }
+
+        return redirect()->back()->with('success', 'Resultado cadastrado!');
+}
+
 
     /**
      * Display the specified resource.

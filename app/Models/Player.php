@@ -8,6 +8,7 @@ class Player extends Model
 {
     protected $fillable = [
         'name',
-        'score'
+        'score',
+        'average_survive'
     ];
 }
