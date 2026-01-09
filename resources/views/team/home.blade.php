@@ -110,7 +110,7 @@
                 <thead class="table-dark">
                     <tr>
                         <th>Jogador</th>
-                        <th>Kills</th>
+                        <th>Kills Totais</th>
                         <th>Média de Kills</th>
                         <th>Média de Sobrevivência</th>
                         <th>Partidas</th>
@@ -125,11 +125,11 @@
 
     <td>
         {{ $player->matches_amount > 0
-            ? number_format($player->kills / $player->matches_amount, 2)
+            ? number_format($player->kills / $player->matches_amount, 1)
             : 0 }}
     </td>
 
-    <td>{{ number_format($player->average_survive, 2) }}</td>
+    <td>{{ number_format($player->average_survive, 1) }}</td>
 
     <td>{{ $player->matches_amount }}</td>
 </tr>
