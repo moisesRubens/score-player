@@ -11,46 +11,35 @@
     <style>
     body {
         background-color: #e6e6e6;
-        /* cor creme */
-    }
-
-    .navbar-brand {
-        padding-left: 0;
-        padding-right: 0;
-    }
-
-    .navbar-brand span {
-        color: white;
-        font-weight: bold;
-        margin-left: 6px;
     }
 
     .navbar {
-        padding-top: 0.25rem;
-        padding-bottom: 0.25rem;
+        padding: 0.25rem 0.75rem;
         max-height: 70px;
     }
 
     .navbar-logo {
         height: 60px;
-        /* LOGO MAIOR */
         width: auto;
     }
 
-    /* Mobile */
+    .menu-icon {
+        height: 36px;
+        width: auto;
+    }
+
+    .dropdown-toggle::after {
+        display: none;
+    }
+
+    /* MOBILE */
     @media (max-width: 768px) {
         .navbar-logo {
-            height: 60px;
-            margin: 0 auto;
+            height: 42px;
         }
 
-        .navbar {
-            padding-left: 0;
-        }
-
-        .a {
-            margin: 0 auto;
-            text-align: center;
+        .menu-icon {
+            height: 30px;
         }
 
         table {
@@ -63,90 +52,9 @@
             white-space: normal;
         }
 
-        /*==Menu de navegação==*/
-
-
-        .mobile-menu a{
-            text-decoration: none;
-            color: inherit;
-        }
-
-        .mobile-menu li{
-            list-style: none;
-            padding-right: 2rem;
-            padding-top: 2rem;
-            font-size: 1.1rem;
-            font-weight: 500;
-        }
-
-        .mobile-menu-icon button{
-            border: none;
-            background-color: transparent;
-        }
-
-        .mobile-menu{
-            background-color: aqua;
-            display: flex;
-            justify-content: flex-start;
-            align-items: flex-start;
-            display: none;
-
-            width: 20%;
-            height: 100%;
-
-            position: fixed;
-            right: 0;
-
-            z-index: 999; /* Garante que ela fique na frente de tudo (camada superior) */
-            box-shadow: -5px 0 15px rgba(0,0,0,0.2); /* Sombra para dar profundidade */
-        }
-
-        .open {
-            display: block;
-        }
-
-        /* Mobile */
-        @media (max-width: 768px) {
-            h1 {
-                /*REMOVER ISSO DEPOIS*/
-                color: green;
-            }
-
-            .navbar-logo {
-                height: 60px;
-                margin: 0 auto;
-            }
-
-            
-            /*MENU MOBILE -> RESPONSIVO AO CELULAR*/
-            .navbar {
-                padding-left: 0;
-                flex-wrap: nowrap;
-            }
-
-            .mobile-menu{
-                width: 50%;
-            }
-
-            .a {
-                margin: 0 auto;
-                text-align: center;
-            }
-
-            table {
-                font-size: 12px;
-            }
-
-            th,
-            td {
-                padding: 6px 4px;
-                white-space: normal;
-            }
-
-            .btn {
-                padding: 2px 6px;
-                font-size: 11px;
-            }
+        .btn {
+            font-size: 11px;
+            padding: 4px 6px;
         }
     }
     </style>
@@ -157,25 +65,33 @@
 
     <header>
         <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
-        <!--Logo Marca-->
-            <div class="container-fluid">
+            <div class="container-fluid d-flex align-items-center">
+
+                <!-- Left logo -->
                 <a class="navbar-brand" href="#">
                     <img src="{{ asset('img/img.png') }}" alt="Logo" class="navbar-logo">
                 </a>
-            </div>
 
-            <!--Botão de Menu-->
-            <div class="mobile-menu-icon">
-                <button onclick=menuShow()><img  class="icon-menu" src="img/menu_white_36dp.svg" alt="Logo Menu"></button>
+                <!-- Right menu icon -->
+                <div class="dropdown ms-auto">
+                    <button class="btn p-0 border-0 bg-transparent dropdown-toggle" type="button"
+                        data-bs-toggle="dropdown" aria-expanded="false">
+
+                        <img src="{{ asset('img/menu_white_36dp.svg') }}" alt="Menu" class="menu-icon">
+                    </button>
+
+                    <ul class="dropdown-menu dropdown-menu-end">
+                        <li>
+                            <a class="dropdown-item" href="{{ route('partidas.index') }}">
+                                Time
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+
             </div>
         </nav>
 
-        <!--Menu interativo-->
-        <div class="mobile-menu">
-            <ul>
-                <li><a href="#">Time</a></li>
-            </ul>
-        </div>
     </header>
 
 
@@ -183,7 +99,7 @@
         <h1 class="ranking-title text-center mb-4">Ranking de Jogadores</h1>
 
         @php
-            $message = session('error') ?? session('warn');
+        $message = session('error') ?? session('warn');
         @endphp
 
         @if($message)
@@ -222,7 +138,8 @@
 
                         <!-- Botão adicionar ponto -->
                         <td>
-                            <form onsubmit="clickSound()" action="{{ route('players.addPoint', $player->id) }}" method="POST">
+                            <form onsubmit="clickSound()" action="{{ route('players.addPoint', $player->id) }}"
+                                method="POST">
                                 @csrf
                                 <button type="submit" class="btn btn-primary btn-sm">MDM +1</button>
                             </form>
@@ -260,26 +177,24 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 
     <script>
+    function clickSound() {
+        const audio = document.getElementById('audio');
+        audio.play();
+    }
 
-        function clickSound() {
-            const audio = document.getElementById('audio');
-            audio.play();
+    /*Função MenuShow()*/
+    function menuShow() {
+        let menuMobile = document.querySelector(".mobile-menu");
+
+        if (menuMobile.classList.contains('open')) {
+            menuMobile.classList.remove('open');
+            document.querySelector(".icon-menu").src = "img/menu_white_36dp.svg";
+
+        } else {
+            menuMobile.classList.add('open');
+            document.querySelector(".icon-menu").src = "img/close_white_36dp.svg";
         }
-
-        /*Função MenuShow()*/
-        function menuShow(){
-            let menuMobile = document.querySelector(".mobile-menu");
-
-            if(menuMobile.classList.contains('open')){
-                menuMobile.classList.remove('open');
-                document.querySelector(".icon-menu").src = "img/menu_white_36dp.svg";
-
-            }
-            else{
-                menuMobile.classList.add('open');
-                document.querySelector(".icon-menu").src = "img/close_white_36dp.svg";
-            }
-        }
+    }
     </script>
 </body>
 

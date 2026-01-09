@@ -45,20 +45,17 @@ class BattleController extends Controller
             'survive_time' => $surviveTime
         ]);
 
-    // Loop through players
         foreach ($request->players as $playerData) {
             $player = Player::find($playerData['id']);
-            if (!$player) continue; // Skip if player not found
+            if ($playerData['survival_minutes']<1) continue; 
 
-            // Update cumulative stats
             $player->kills += $playerData['kills'];
             $player->average_survive = 
                 ($player->average_survive * $player->matches_amount + $playerData['survival_minutes'])
                 / ($player->matches_amount + 1);
             $player->matches_amount++;
             $player->save();
-
-            // Save the performance in pivot table
+            
             PlayerPerformance::create([
                 'match_id' => $battle->id,
                 'player_id' => $player->id,
@@ -67,7 +64,7 @@ class BattleController extends Controller
             ]);
         }
 
-        return redirect()->back()->with('success', 'Resultado cadastrado!');
+        return redirect()->route('partidas.index')->with('success', 'Resultado cadastrado!');
 }
 
 
