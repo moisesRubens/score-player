@@ -15,4 +15,10 @@ Route::prefix('players')->group(function () {
     Route::post('/{player}/add-point', [PlayerController::class, 'addPoint'])->name('players.addPoint');
 });
 
+
+Route::prefix('partidas')->group(function() {
+    Route::get('/filter', [BattleController::class, 'filterResultsByMap'])
+        ->name('partidas.filterResultsByMap');
+});
 Route::resource('partidas', BattleController::class);
+
