@@ -13,22 +13,36 @@ class BattleController extends Controller
      * Display a listing of the resource.
      */
     public function index()
-{
-    // Load all performances with related player and battle
-    $team = PlayerPerformance::with(['player', 'battle'])->get();
+    {
+        // Load all performances with related player and battle
+        $team = PlayerPerformance::with(['player', 'battle'])->get();
 
-    // Default map filter
-    $mapa = 'todos';
+        // Default map filter
+        $mapa = 'todos';
 
-    // Get unique players from the performances
-    $players = $team->pluck('player')->unique('id');
+        // Get unique players from the performances
+        $players = $team->pluck('player')->unique('id');
 
-    $battles = Battle::all();
-    // dd($battles);
-    // dd(vars: $team);
-    return view('team.home', compact('team', 'mapa', 'players', 'battles'));
-}
+        $battles = Battle::all();
+        return view('team.home', compact('team', 'mapa', 'players', 'battles'));
+    }
 
+    public function filterResultsByMap(Request $request)
+    {
+        $mapa = $request->query('map', 'todos');
+
+        // Get performances
+        $team = PlayerPerformance::with(['battle', 'player'])
+            ->when($mapa != 'todos', fn($q) => $q->where('map', $mapa))
+            ->get();
+
+        $players = $team->pluck('player')->unique('id');
+
+        // Get battles that exist in the performances
+        $battleIds = $team->pluck('match_id')->unique();
+        $battles = Battle::whereIn('id', $battleIds)->get();
+        return view('team.home', compact('team', 'mapa', 'players', 'battles'));
+    }
 
     /**
      * Show the form for creating a new resource.
@@ -81,23 +95,7 @@ class BattleController extends Controller
     /**
      * Filter results by map
      */
-    public function filterResultsByMap(Request $request)
-{
-    $mapa = $request->query('map', 'todos');
-
-    // Get performances
-    $team = PlayerPerformance::with(['battle', 'player'])
-        ->when($mapa != 'todos', fn($q) => $q->where('map', $mapa))
-        ->get();
-
-    $players = $team->pluck('player')->unique('id');
-
-    // Get battles that exist in the performances
-    $battleIds = $team->pluck('match_id')->unique();
-    $battles = Battle::whereIn('id', $battleIds)->get();
-
-    return view('team.home', compact('team', 'mapa', 'players', 'battles'));
-}
+    
 
 
 }

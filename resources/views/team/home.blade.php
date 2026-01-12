@@ -119,21 +119,13 @@
 
         @if($team->isNotEmpty())
 
-            {{-- Summary Cards --}}
             @php
-                $totalMatches = count($battles); // $battles is an array
+                $totalMatches = count($battles);
                 $totalKills = $team->sum('individual_kills');
-
-                // Average kills
                 $avgKills = $totalMatches > 0 ? number_format($totalKills / $totalMatches, 1) : 0;
-
-                // Average survival time
-                $avgSurvival = 0;
+                $avgSurvival = 6;
                 if ($totalMatches > 0) {
-                    $survivalTimes = $team->map(function($performance) {
-                        return $performance->battle->survival_time ?? 0; // safe fallback
-                    });
-                    $avgSurvival = number_format($survivalTimes->avg(), 1);
+                    $avgSurvival = number_format($battles->avg('survive_time'), 1);
                 }
             @endphp
 
@@ -185,14 +177,9 @@
                                 $totalMatches = $playerPerformances->count();
                                 $totalKills = $playerPerformances->sum('individual_kills');
                                 $avgKills = $totalMatches > 0 ? number_format($totalKills / $totalMatches, 1) : 0;
-
-                                // Average survival time for this player
                                 $avgSurvival = 0;
                                 if ($totalMatches > 0) {
-                                    $survivalTimes = $playerPerformances->map(function($performance) {
-                                        return $performance->battle->survival_time ?? 0;
-                                    });
-                                    $avgSurvival = number_format($survivalTimes->avg(), 1);
+                                    $avgSurvival = number_format($playerPerformances->avg('individual_survive'), 1);
                                 }
                             @endphp
                             <tr>
