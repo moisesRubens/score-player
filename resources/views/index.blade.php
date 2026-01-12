@@ -32,6 +32,8 @@
         display: none;
     }
 
+    
+
     /* MOBILE */
     @media (max-width: 768px) {
         .navbar-logo {

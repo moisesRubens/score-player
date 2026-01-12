@@ -12,12 +12,18 @@ class PlayerPerformance extends Model
         'player_id',
         'match_id',
         'map',
-        'individual_kills'
+        'individual_kills',
+        'individual_survive'
     ];
 
     public function player()
     {
         return $this->belongsTo(Player::class);
+    }
+
+    public function battle() 
+    {
+        return $this->belongsTo(Battle::class);
     }
 
 }
