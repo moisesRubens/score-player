@@ -99,13 +99,13 @@
                         </div>
 
                         <div class="col-md-6">
-                            <label class="form-label fw-semibold">Colocação</label>
+                            <label class="form-label fw-semibold">Colocação *</label>
                             <input type="text" name="placing" class="form-control">
                         </div>
                     </div>
 
                     <div class="mb-3">
-                        <label class="form-label fw-semibold">Mapa</label>
+                        <label class="form-label fw-semibold">Mapa *</label>
                         <select class="form-select" name="map">
                             <option selected disabled>Mapa</option>
                             <option>Erangel</option>
@@ -143,7 +143,7 @@
                                         <input
                                             type="number"
                                             min="0"
-                                            step="1"
+                                            step="0.1"
                                             class="form-control form-control-sm text-center"
                                             name="players[{{ $player->id }}][survival_minutes]"
                                             placeholder="Minutos">
