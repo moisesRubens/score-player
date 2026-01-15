@@ -6,6 +6,7 @@ use App\Models\Battle;
 use App\Models\Player;
 use Illuminate\Http\Request;
 use App\Models\PlayerPerformance;
+use Exception;
 
 class BattleController extends Controller
 {
@@ -58,38 +59,42 @@ class BattleController extends Controller
      */
     public function store(Request $request)
     {
-        $playersData = $request->players;
-        $totalKills = array_sum(array_column($playersData, 'kills'));
-        $surviveTime = max(array_column($playersData, 'survival_minutes'));
+        try {
+            $playersData = $request->players;
+            $totalKills = array_sum(array_column($playersData, 'kills'));
+            $surviveTime = max(array_column($playersData, 'survival_minutes'));
 
-        $battle = Battle::create([
-            'score' => $request->score,
-            'placing' => $request->placing,
-            'map' => $request->map,
-            'total_kills' => $totalKills,
-            'survive_time' => $surviveTime
-        ]);
-
-        foreach ($request->players as $playerData) {
-            $player = Player::find($playerData['id']);
-            if ($playerData['survival_minutes'] < 1) continue; 
-
-            $player->kills += $playerData['kills'];
-            $player->average_survive =
-                ($player->average_survive * $player->matches_amount + $playerData['survival_minutes'])
-                / ($player->matches_amount + 1);
-            $player->matches_amount++;
-            $player->save();
-
-            PlayerPerformance::create([
-                'match_id' => $battle->id,
-                'player_id' => $player->id,
+            $battle = Battle::create([
+                'score' => $request->score,
+                'placing' => $request->placing,
                 'map' => $request->map,
-                'individual_kills' => $playerData['kills'],
-                'individual_survive' => $playerData['survival_minutes'],
+                'total_kills' => $totalKills,
+                'survive_time' => $surviveTime
             ]);
+
+            foreach ($request->players as $playerData) {
+                $player = Player::find($playerData['id']);
+                if ($playerData['survival_minutes'] < 1) continue; 
+
+                $player->kills += $playerData['kills'];
+                $player->average_survive =
+                    ($player->average_survive * $player->matches_amount + $playerData['survival_minutes'])
+                    / ($player->matches_amount + 1);
+                $player->matches_amount++;
+                $player->save();
+
+                PlayerPerformance::create([
+                    'match_id' => $battle->id,
+                    'player_id' => $player->id,
+                    'map' => $request->map,
+                    'individual_kills' => $playerData['kills'],
+                    'individual_survive' => $playerData['survival_minutes'],
+                ]);
+            }
+            return redirect()->route('partidas.index')->with('success', 'Resultado cadastrado!');
+        } catch(Exception $e) {
+            return redirect()->route('partidas.create')->with('warning', 'Preencha corretamente os campos');
         }
-        return redirect()->route('partidas.index')->with('success', 'Resultado cadastrado!');
     }
 
     /**
