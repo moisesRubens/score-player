@@ -10,7 +10,7 @@
     <link rel="stylesheet" href="cdnjs.cloudflare.com">
     <style>
     body {
-        background-color: #e6e6e6;
+        background-color: #fcfcfc;
     }
 
     .navbar {
