@@ -1,0 +1,163 @@
+img {
+    width: 30px;
+    /* Ajuste a largura da imagem */
+    height: 30px;
+    /* Ajuste a altura da imagem */
+}
+
+.vz-navbar {
+    background-color: #0968E5;
+    padding: 0.5rem 0.75rem;
+    /* Uniform padding */
+    height: 70px !important;
+    /* Set a consistent height */
+}
+
+.navbar-logo {
+    height: 50px;
+    /* Consistent logo size */
+    width: auto;
+}
+
+/* Navbar for smaller screens (Mobile) */
+@media (max-width: 768px) {
+    .navbar {
+        padding: 0.25rem 0.5rem;
+        /* Adjust padding for smaller screens */
+        height: 60px !important;
+        /* Slightly smaller height for mobile */
+    }
+
+    .navbar-logo {
+        height: 40px;
+        /* Smaller logo on mobile */
+    }
+
+    img {
+        width: 20px;
+        /* Ajuste a largura da imagem */
+        height: 20px;
+        /* Ajuste a altura da imagem */
+    }
+
+    .button a {
+        display: inline-block;
+        /* Garantir que o botão se comporte como um bloco */
+        width: 170px;
+        /* Garantir que o botão ocupe 100% da largura no mobile */
+        max-width: 250px;
+        /* Defina uma largura máxima */
+        margin: 0 auto;
+        /* Centraliza o botão */
+    }
+}
+
+/* Table Styles */
+.table-style tr:last-child td:first-child {
+    border-bottom-left-radius: 12px;
+}
+
+.table-style tr:last-child td:last-child {
+    border-bottom-right-radius: 12px;
+}
+
+.table-style tr:first-child th:first-child {
+    border-top-left-radius: 12px;
+}
+
+.table-style tr:first-child th:last-child {
+    border-top-right-radius: 12px;
+}
+
+.table-style th,
+.table-style td {
+    font-weight: bold;
+    line-height: 2.6;
+    color: white;
+    border: none !important;
+    /* Removed border */
+}
+
+.table-style {
+    border-collapse: collapse;
+    font-size: 14px;
+    /* Default font size */
+}
+
+.table-style th {
+    background-color: #094EBE;
+}
+
+.table-style tbody tr:nth-child(odd) td {
+    background-color: #0968E5;
+}
+
+.table-style tbody tr:nth-child(even) td {
+    background-color: #094EBE;
+}
+
+/* Mobile table adjustments */
+@media(max-width: 768px) {
+
+    .table-style th,
+    .table-style td {
+        font-size: 12px;
+        /* Smaller text for mobile */
+        padding: 6px 4px;
+        /* Adjust padding for smaller screens */
+        border: none !important;
+        /* No borders on mobile */
+    }
+}
+
+/* Button Styles */
+.btn {
+    font-size: 14px;
+    /* Default button text size */
+    padding: 10px 15px;
+    /* Adequate padding for desktop */
+    border-radius: 5px;
+    /* Round button edges */
+}
+
+/* Mobile adjustments */
+@media(max-width: 768px) {
+    .btn {
+        font-size: 12px;
+        /* Smaller font for mobile */
+        padding: 6px 10px;
+        /* Reduced padding */
+        width: 100%;
+        /* Buttons take full width on mobile */
+    }
+}
+
+/* Card Styles */
+.report-card .card-body {
+    padding: 0.4rem;
+}
+
+/* Dropdown Menu */
+.dropdown-toggle::after {
+    display: none !important;
+    /* Remove default dropdown arrow */
+}
+
+@media (max-width: 768px) {
+    .menu-icon {
+        height: 30px;
+        /* Smaller menu icon on mobile */
+    }
+}
+
+/* Styling for alert messages */
+.alert {
+    padding: 0.75rem;
+    font-size: 16px;
+}
+
+/* Styling for the filter form */
+.form-select {
+    padding: 8px;
+    font-size: 14px;
+}

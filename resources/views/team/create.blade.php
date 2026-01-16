@@ -72,13 +72,15 @@
 
 <body>
 
-    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
-        <div class="container-fluid">
-            <a class="navbar-brand" href="#">
-                <img src="{{ asset('img/img.png') }}" alt="Logo" class="navbar-logo">
-            </a>
-        </div>
-    </nav>
+    <header>
+        <nav class="vz-navbar navbar navbar-expand-lg navbar-dark" style="background-color: #0968E5">
+            <div class="container-fluid">
+                <a class="navbar-brand" href="{{ route('players.index') }}">
+                    <img src="{{ asset('img/vz_logo.png') }}" alt="Logo" class="navbar-logo">
+                </a>
+            </div>
+        </nav>
+    </header>
 
     @php
     $message = session('warning');

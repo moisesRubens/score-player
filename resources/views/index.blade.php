@@ -8,6 +8,7 @@
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="cdnjs.cloudflare.com">
+    <link rel="stylesheet" href="{{ asset('css/style.css') }}">
     <style>
     body {
         background-color: #fcfcfc;
@@ -36,6 +37,12 @@
 
     /* MOBILE */
     @media (max-width: 768px) {
+
+        .table-responsive .btn-danger {
+            width: auto; 
+            padding: 4px 14px; 
+            font-size: 10px; 
+        }
         .navbar-logo {
             height: 42px;
         }
@@ -53,11 +60,6 @@
             padding: 6px 4px;
             white-space: normal;
         }
-
-        .btn {
-            font-size: 11px;
-            padding: 4px 6px;
-        }
     }
     </style>
 
@@ -66,12 +68,12 @@
 <body>
 
     <header>
-        <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+        <nav class="vz-navbar navbar navbar-expand-lg navbar-dark">
             <div class="container-fluid d-flex align-items-center">
 
                 <!-- Left logo -->
                 <a class="navbar-brand" href="#">
-                    <img src="{{ asset('img/img.png') }}" alt="Logo" class="navbar-logo">
+                    <img src="{{ asset('img/vz_logo.png') }}" alt="Logo" class="navbar-logo">
                 </a>
 
                 <!-- Right menu icon -->
@@ -122,7 +124,7 @@
 
         @if($players->isNotEmpty())
         <div class="table-responsive">
-            <table class="table table-striped table-bordered align-middle text-center">
+            <table class="table table-style align-middle text-center">
                 <thead class="table-dark">
                     <tr>
                         <th>Nick</th>
@@ -143,13 +145,15 @@
                             <form onsubmit="clickSound()" action="{{ route('players.addPoint', $player->id) }}"
                                 method="POST">
                                 @csrf
-                                <button type="submit" class="btn btn-primary btn-sm">MDM +1</button>
+                                <button type="submit" style="border-radius: 8px; " class="btn btn-danger btn-sm">MDM +1</button>
                             </form>
                         </td>
 
                         <!-- Botão editar -->
                         <td>
-                            <a href="{{ route('players.edit', $player->id) }}" class="btn btn-primary btn-sm">Editar</a>
+                            <a href="{{ route('players.edit', $player->id) }}" class="btn">
+                                <img src="{{ asset('img/pencil.png') }}" alt="">
+                            </a>
                         </td>
 
                         <!-- Botão deletar -->
@@ -157,7 +161,9 @@
                             <form action="{{ route('players.destroy', $player->id) }}" method="POST">
                                 @csrf
                                 @method('DELETE')
-                                <button type="submit" class="btn btn-danger btn-sm">Excluir</button>
+                                <button type="submit" class="btn">
+                                    <img src="{{ asset('img/trash.png') }}" alt="" style="font-size: 20px">
+                                </button>
                             </form>
                         </td>
                     </tr>
@@ -169,7 +175,7 @@
         <p class="text-center mt-4">Nenhum jogador cadastrado ainda.</p>
         @endif
         <!-- Botão para registrar novo player -->
-        <div class="mb-3 text-center">
+        <div class="button text-center">
             <a href="{{ route('players.create') }}" class="btn btn-primary">Registrar-se</a>
         </div>
     </div>
