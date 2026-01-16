@@ -76,13 +76,15 @@
 
 <body>
 
-    <nav class="vz-navbar navbar navbar-expand-lg navbar-dark">
-        <div class="container-fluid">
-            <a class="navbar-brand" href="{{ route('players.index') }}">
-                <img src="{{ asset('img/vz_logo.png') }}" alt="Logo" class="navbar-logo">
-            </a>
-        </div>
-    </nav>
+    <header>
+        <nav class="vz-navbar navbar navbar-expand-lg navbar-dark" style="background-color: #0968E5">
+            <div class="container-fluid">
+                <a class="navbar-brand" href="{{ route('players.index') }}">
+                    <img src="{{ asset('img/vz_logo.png') }}" alt="Logo" class="navbar-logo">
+                </a>
+            </div>
+        </nav>
+    </header>
 
     <div class="container py-5">
 
