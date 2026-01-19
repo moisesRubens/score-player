@@ -7,6 +7,8 @@
     <title>Ranking de Jogadores</title>
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="{{ asset('css/style.css') }}">
+
     <style>
         body {
             background-color: #fcfcfc;
@@ -46,14 +48,14 @@
                 height: 42px;
             }
 
-            table {
+            .table-style th, .table-style td{
                 font-size: 12px;
+                border: none;
             }
 
             th,
             td {
                 padding: 6px 4px;
-                white-space: nowrap;
             }
 
             .btn {
@@ -74,13 +76,15 @@
 
 <body>
 
-    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
-        <div class="container-fluid">
-            <a class="navbar-brand" href="#">
-                <img src="{{ asset('img/img.png') }}" alt="Logo" class="navbar-logo">
-            </a>
-        </div>
-    </nav>
+    <header>
+        <nav class="vz-navbar navbar navbar-expand-lg navbar-dark" style="background-color: #0968E5">
+            <div class="container-fluid">
+                <a class="navbar-brand" href="{{ route('players.index') }}">
+                    <img src="{{ asset('img/vz_logo.png') }}" alt="Logo" class="navbar-logo">
+                </a>
+            </div>
+        </nav>
+    </header>
 
     <div class="container py-5">
 
@@ -160,8 +164,8 @@
 
             {{-- Player Table --}}
             <div class="table-responsive">
-                <table class="table table-striped table-bordered align-middle text-center">
-                    <thead class="table-dark">
+                <table  class="table-style table align-middle text-center ">
+                    <thead>
                         <tr>
                             <th>Nick</th>
                             <th>Partidas</th>
