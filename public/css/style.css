@@ -1,3 +1,8 @@
+body {
+    background-color: #fcfcfc;
+    ;
+}
+
 img {
     width: 30px;
     height: 30px;
@@ -14,6 +19,15 @@ img {
     width: auto;
 }
 
+.menu-icon {
+    height: 36px;
+    width: auto;
+}
+
+.dropdown-toggle::after {
+    display: none !important;
+}
+
 /* Navbar for smaller screens (Mobile) */
 @media (max-width: 768px) {
     .navbar {
@@ -24,8 +38,11 @@ img {
     }
 
     .navbar-logo {
-        height: 40px;
-        /* Smaller logo on mobile */
+        height: 42px;
+    }
+
+    .menu-icon {
+        height: 30px;
     }
 
     img {
@@ -35,15 +52,27 @@ img {
         /* Ajuste a altura da imagem */
     }
 
-    .button a {
-        display: inline-block;
-        /* Garantir que o botão se comporte como um bloco */
-        width: 170px;
-        /* Garantir que o botão ocupe 100% da largura no mobile */
-        max-width: 250px;
-        /* Defina uma largura máxima */
+    .button {
+        font-size: 12px;
+        padding: 6px 10px;
+        display: block;
+        width: 50%;
         margin: 0 auto;
-        /* Centraliza o botão */
+    }
+
+    .mb-3.text-center {
+        display: grid;
+        gap: 8px;
+    }
+
+    .table-style th,
+    .table-style td {
+        font-size: 12px;
+        /* Smaller text for mobile */
+        padding: 6px 4px;
+        /* Adjust padding for smaller screens */
+        border: none !important;
+        /* No borders on mobile */
     }
 }
 
@@ -91,43 +120,6 @@ img {
     background-color: #094EBE;
 }
 
-/* Mobile table adjustments */
-@media(max-width: 768px) {
-
-    .table-style th,
-    .table-style td {
-        font-size: 12px;
-        /* Smaller text for mobile */
-        padding: 6px 4px;
-        /* Adjust padding for smaller screens */
-        border: none !important;
-        /* No borders on mobile */
-    }
-}
-
-/* Button Styles */
-.btn {
-    font-size: 14px;
-    /* Default button text size */
-    padding: 10px 15px;
-    /* Adequate padding for desktop */
-    border-radius: 5px;
-    /* Round button edges */
-}
-
-/* Mobile adjustments */
-@media(max-width: 768px) {
-    .btn {
-        font-size: 12px;
-        /* Smaller font for mobile */
-        padding: 6px 10px;
-        /* Reduced padding */
-        width: 100%;
-        /* Buttons take full width on mobile */
-    }
-}
-
-/* Card Styles */
 .report-card .card-body {
     padding: 0.4rem;
 }
@@ -136,13 +128,6 @@ img {
 .dropdown-toggle::after {
     display: none !important;
     /* Remove default dropdown arrow */
-}
-
-@media (max-width: 768px) {
-    .menu-icon {
-        height: 30px;
-        /* Smaller menu icon on mobile */
-    }
 }
 
 /* Styling for alert messages */

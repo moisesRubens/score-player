@@ -9,31 +9,10 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="cdnjs.cloudflare.com">
     <link rel="stylesheet" href="{{ asset('css/style.css') }}">
+    
     <style>
-        body {
-            background-color: #fcfcfc;
-        }
-
-        .menu-icon {
-            height: 36px;
-            width: auto;
-        }
-
-        .dropdown-toggle::after {
-            display: none;
-        }
-
-
-
         /* MOBILE */
         @media (max-width: 768px) {
-            .navbar-logo {
-                height: 42px;
-            }
-
-            .menu-icon {
-                height: 30px;
-            }
 
             table {
                 font-size: 12px;
@@ -43,11 +22,6 @@
             td {
                 padding: 6px 4px;
                 white-space: normal;
-            }
-
-            .btn {
-                font-size: 11px;
-                padding: 4px 6px;
             }
         }
     </style>
@@ -60,12 +34,10 @@
         <nav class="vz-navbar navbar navbar-expand-lg navbar-dark">
             <div class="container-fluid d-flex align-items-center">
 
-                <!-- Left logo -->
                 <a class="navbar-brand" href="#">
                     <img src="{{ asset('img/vz_logo.png') }}" alt="Logo" class="navbar-logo">
                 </a>
 
-                <!-- Right menu icon -->
                 <div class="dropdown ms-auto">
                     <button class="btn p-0 border-0 bg-transparent dropdown-toggle" type="button"
                         data-bs-toggle="dropdown" aria-expanded="false">
@@ -83,6 +55,7 @@
                 </div>
 
             </div>
+            
         </nav>
 
     </header>
@@ -159,14 +132,14 @@
         @else
             <p class="text-center mt-4">Nenhum jogador cadastrado ainda.</p>
         @endif
-        <!-- Botão para registrar novo player -->
+        
         <div class="mb-3 text-center">
-            <a href="{{ route('players.create') }}" class="btn btn-primary">Registrar-se</a>
+            <a href="{{ route('players.create') }}" class="btn button btn-primary">Registrar-se</a>
         </div>
     </div>
 
     <audio id="audio" src="{{ asset('audio/click_sound.mp3') }}" preload="auto"></audio>
-    <!-- Bootstrap JS -->
+    
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 
     <script>
