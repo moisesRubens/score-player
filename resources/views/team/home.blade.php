@@ -4,65 +4,19 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <title>Ranking de Jogadores</title>
-    <!-- Bootstrap CSS -->
+
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="{{ asset('css/style.css') }}">
 
     <style>
-        body {
-            background-color: #fcfcfc;
-        }
-        .navbar-logo {
-            height: 56px;
-            width: auto;
-        }
-
         table {
             font-size: 14px;
         }
 
-        .btn {
-            width: 200px;
-        }
-
         .report-card .card-body {
             padding: 0.4rem;
-        }
-
-        /* remove default dropdown arrow */
-        .dropdown-toggle::after {
-            display: none !important;
-        }
-
-        /* MOBILE */
-        @media (max-width: 768px) {
-            .navbar-logo {
-                height: 42px;
-            }
-
-            .table-style th, .table-style td{
-                font-size: 12px;
-                border: none;
-            }
-
-            th,
-            td {
-                padding: 6px 4px;
-            }
-
-            .btn {
-                font-size: 12px;
-                padding: 6px 10px;
-                display: block;
-                width: 50%;
-                margin: 0 auto;
-            }
-
-            .mb-3.text-center {
-                display: grid;
-                gap: 8px;
-            }
         }
     </style>
 </head>
@@ -70,18 +24,39 @@
 <body>
 
     <header>
-        <nav class="vz-navbar navbar navbar-expand-lg navbar-dark" style="background-color: #0968E5">
-            <div class="container-fluid">
+        <nav class="vz-navbar navbar navbar-expand-lg navbar-dark">
+
+            <div class="container-fluid d-flex align-items-center">
+
                 <a class="navbar-brand" href="{{ route('players.index') }}">
                     <img src="{{ asset('img/vz_logo.png') }}" alt="Logo" class="navbar-logo">
                 </a>
+
+                <div class="dropdown ms-auto">
+                    <button class="btn p-0 border-0 bg-transparent dropdown-toggle" type="button"
+                        data-bs-toggle="dropdown" aria-expanded="false">
+
+                        <img src="{{ asset('img/menu_white_36dp.svg') }}" alt="Menu" class="menu-icon">
+                    </button>
+
+                    <ul class="dropdown-menu dropdown-menu-end">
+                        <li>
+                            <a class="dropdown-item" href="{{ route('players.index') }}">
+                                Página inicial
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+
             </div>
+
         </nav>
+
+
     </header>
 
     <div class="container py-5">
 
-        {{-- Display session messages --}}
         @php
             $message = session('error') ?? session('warn');
         @endphp
@@ -102,10 +77,7 @@
         <form method="get" action="{{ route('partidas.filterResultsByMap') }}">
             <div class="row-md-4 mb-4">
                 <label for="filtro-mapa" class="form-label fw-bold">Mapa</label>
-                <select class="form-select"
-                        id="filtro-mapa"
-                        name="map"
-                        onchange="this.form.submit()">
+                <select class="form-select" id="filtro-mapa" name="map" onchange="this.form.submit()">
                     <option value="erangel" {{ ($mapa ?? '') == 'erangel' ? 'selected' : '' }}>Erangel</option>
                     <option value="miramar" {{ ($mapa ?? '') == 'miramar' ? 'selected' : '' }}>Miramar</option>
                     <option value="rondo" {{ ($mapa ?? '') == 'rondo' ? 'selected' : '' }}>Rondo</option>
@@ -157,7 +129,7 @@
 
             {{-- Player Table --}}
             <div class="table-responsive">
-                <table  class="table-style table align-middle text-center ">
+                <table class="table-style table align-middle text-center ">
                     <thead>
                         <tr>
                             <th>Nick</th>
@@ -196,13 +168,13 @@
         @endif
 
         <div class="mb-3 text-center">
-            <a href="{{ route('partidas.create') }}" class="btn btn-primary">Adicionar</a>
-            <a href="{{ route('players.index') }}" class="btn btn-primary">Voltar</a>
+            <a href="{{ route('partidas.create') }}" class="btn button btn-primary">Adicionar</a>
+            <a href="{{ route('players.index') }}" class="btn button btn-primary">Voltar</a>
         </div>
     </div>
 
-    <!-- Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
 </body>
 
 </html>
