@@ -168,8 +168,8 @@
         @endif
 
         <div class="mb-3 text-center">
-            <a href="{{ route('partidas.create') }}" class="btn button btn-primary">Adicionar</a>
-            <a href="{{ route('players.index') }}" class="btn button btn-primary">Voltar</a>
+            <a href="{{ route('partidas.create') }}" class="strong-text btn button btn-primary">Adicionar</a>
+            <a href="{{ route('players.index') }}" class="strong-text btn button btn-primary">Voltar</a>
         </div>
     </div>
 

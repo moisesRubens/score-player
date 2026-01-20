@@ -9,19 +9,11 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="cdnjs.cloudflare.com">
     <link rel="stylesheet" href="{{ asset('css/style.css') }}">
-    
+
     <style>
-        /* MOBILE */
         @media (max-width: 768px) {
-
             table {
-                font-size: 12px;
-            }
-
-            th,
-            td {
-                padding: 6px 4px;
-                white-space: normal;
+                font-size: 14px;
             }
         }
     </style>
@@ -55,7 +47,7 @@
                 </div>
 
             </div>
-            
+
         </nav>
 
     </header>
@@ -85,61 +77,67 @@
         @endif
 
         @if($players->isNotEmpty())
-            <div class="table-responsive">
-                <table class="table table-striped table-bordered align-middle text-center">
-                    <thead class="table-dark">
-                        <tr>
-                            <th>Nick</th>
-                            <th>MDMs jogados</th>
-                            <th>Adicionar Ponto</th>
-                            <th>Editar</th>
-                            <th>Deletar</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @foreach($players as $player)
+            <div class="mb-4" style="background-color: white">
+                <div class="table-responsive custom-shadow rounded">
+
+                    <table class="table table-borderless align-middle text-center">
+                        <thead>
                             <tr>
-                                <td>{{ $player->name }}</td>
-                                <td>{{ $player->score }}</td>
-
-                                <!-- Botão adicionar ponto -->
-                                <td>
-                                    <form onsubmit="clickSound()" action="{{ route('players.addPoint', $player->id) }}"
-                                        method="POST">
-                                        @csrf
-                                        <button type="submit" class="btn btn-primary btn-sm">MDM +1</button>
-                                    </form>
-                                </td>
-
-                                <!-- Botão editar -->
-                                <td>
-                                    <a href="{{ route('players.edit', $player->id) }}" class="btn btn-primary btn-sm">Editar</a>
-                                </td>
-
-                                <!-- Botão deletar -->
-                                <td>
-                                    <form action="{{ route('players.destroy', $player->id) }}" method="POST">
-                                        @csrf
-                                        @method('DELETE')
-                                        <button type="submit" class="btn btn-danger btn-sm">Excluir</button>
-                                    </form>
-                                </td>
+                                <th>Nick</th>
+                                <th>MDMs jogados</th>
+                                <th>Adicionar ponto</th>
+                                <th>Editar</th>
+                                <th>Deletar</th>
                             </tr>
-                        @endforeach
-                    </tbody>
-                </table>
+                        </thead>
+                        <tbody>
+                            @foreach($players as $player)
+                                <tr>
+                                    <td>{{ $player->name }}</td>
+                                    <td>{{ $player->score }}</td>
+                                    <!-- Botão adicionar ponto -->
+                                    <td>
+                                        <form onsubmit="clickSound()" action="{{ route('players.addPoint', $player->id) }}"
+                                            method="POST">
+                                            @csrf
+                                            <button type="submit" class="btn-table btn btn-primary btn-sm">MDM</button>
+                                        </form>
+                                    </td>
+                                    <!-- Botão editar -->
+                                    <td>
+                                        <a href="{{ route('players.edit', $player->id) }}" class=" btn-table bt btn-sm">
+                                            <i><img src="{{ asset('img/pencil.png') }}" alt=""></i>
+                                        </a>
+                                    </td>
+                                    <!-- Botão deletar -->
+                                    <td>
+                                        <form action="{{ route('players.destroy', $player->id) }}" method="POST">
+                                            @csrf
+                                            @method('DELETE')
+                                            <button type="submit" class="btn-table btn btn-sm">
+                                                <i><img src="{{ asset('img/trash.png') }}" alt=""></i>
+                                            </button>
+                                        </form>
+                                    </td>
+                                </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
+                    
+                </div>
+
             </div>
         @else
             <p class="text-center mt-4">Nenhum jogador cadastrado ainda.</p>
         @endif
-        
+
         <div class="mb-3 text-center">
-            <a href="{{ route('players.create') }}" class="btn button btn-primary">Registrar-se</a>
+            <a href="{{ route('players.create') }}" class="strong-text btn button btn-primary">Registrar-se</a>
         </div>
     </div>
 
     <audio id="audio" src="{{ asset('audio/click_sound.mp3') }}" preload="auto"></audio>
-    
+
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 
     <script>

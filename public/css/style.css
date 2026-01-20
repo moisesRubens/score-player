@@ -3,6 +3,14 @@ body {
     ;
 }
 
+.strong-text {
+    font-weight: bold;
+}
+
+.custom-shadow {
+    box-shadow: 4px 4px 12px rgba(0, 0, 0, 0.288);
+}
+
 img {
     width: 30px;
     height: 30px;
@@ -32,9 +40,7 @@ img {
 @media (max-width: 768px) {
     .navbar {
         padding: 0.25rem 0.5rem;
-        /* Adjust padding for smaller screens */
         height: 60px !important;
-        /* Slightly smaller height for mobile */
     }
 
     .navbar-logo {
@@ -47,9 +53,7 @@ img {
 
     img {
         width: 20px;
-        /* Ajuste a largura da imagem */
         height: 20px;
-        /* Ajuste a altura da imagem */
     }
 
     .button {
@@ -60,6 +64,12 @@ img {
         margin: 0 auto;
     }
 
+    .btn-table {
+        font-size: 97%;
+        width: 50px;
+        height: 30px;
+    }
+
     .mb-3.text-center {
         display: grid;
         gap: 8px;
@@ -68,28 +78,24 @@ img {
     .table-style th,
     .table-style td {
         font-size: 12px;
-        /* Smaller text for mobile */
         padding: 6px 4px;
-        /* Adjust padding for smaller screens */
         border: none !important;
-        /* No borders on mobile */
     }
 }
 
-/* Table Styles */
-.table-style tr:last-child td:first-child {
+.table tr:last-child td:first-child {
     border-bottom-left-radius: 12px;
 }
 
-.table-style tr:last-child td:last-child {
+.table tr:last-child td:last-child {
     border-bottom-right-radius: 12px;
 }
 
-.table-style tr:first-child th:first-child {
+.table th:first-child {
     border-top-left-radius: 12px;
 }
 
-.table-style tr:first-child th:last-child {
+.table th:last-child {
     border-top-right-radius: 12px;
 }
 
@@ -140,4 +146,11 @@ img {
 .form-select {
     padding: 8px;
     font-size: 14px;
+}
+
+.table th {
+    color: white;
+    font-weight: bold;
+    background-color: #0968E5;
+    border-bottom: 20px;
 }
