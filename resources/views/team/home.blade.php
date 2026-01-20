@@ -13,18 +13,11 @@
         body {
             background-color: #fcfcfc;
         }
-
-        /* NAVBAR */
-        .navbar {
-            padding: 0.5rem 0.75rem;
-        }
-
         .navbar-logo {
             height: 56px;
             width: auto;
         }
 
-        /* TABLE */
         table {
             font-size: 14px;
         }
