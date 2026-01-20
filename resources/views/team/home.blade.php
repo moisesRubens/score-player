@@ -127,41 +127,38 @@
                 </div>
             </div>
 
-            {{-- Player Table --}}
-            <div class="table-responsive">
-                <table class="table-style table align-middle text-center ">
-                    <thead>
-                        <tr>
-                            <th>Nick</th>
-                            <th>Partidas</th>
-                            <th>Kills</th>
-                            <th>Média Kills</th>
-                            <th>Média Sobrevivência</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @foreach($players as $player)
-                            @php
-                                $playerPerformances = $team->where('player.id', $player->id);
-                                $totalMatches = $playerPerformances->count();
-                                $totalKills = $playerPerformances->sum('individual_kills');
-                                $avgKills = $totalMatches > 0 ? number_format($totalKills / $totalMatches, 1) : 0;
-                                $avgSurvival = 0;
-                                if ($totalMatches > 0) {
-                                    $avgSurvival = number_format($playerPerformances->avg('individual_survive'), 1);
-                                }
-                            @endphp
+                    <table class="table table-responsive custom-shadow rounded align-middle text-center ">
+                        <thead>
                             <tr>
-                                <td>{{ $player->name }}</td>
-                                <td>{{ $totalMatches }}</td>
-                                <td>{{ $totalKills }}</td>
-                                <td>{{ $avgKills }}</td>
-                                <td>{{ $avgSurvival }}</td>
+                                <th>Nick</th>
+                                <th>Partidas</th>
+                                <th>Kills</th>
+                                <th>Média Kills</th>
+                                <th>Média Sobrevivência</th>
                             </tr>
-                        @endforeach
-                    </tbody>
-                </table>
-            </div>
+                        </thead>
+                        <tbody>
+                            @foreach($players as $player)
+                                @php
+                                    $playerPerformances = $team->where('player.id', $player->id);
+                                    $totalMatches = $playerPerformances->count();
+                                    $totalKills = $playerPerformances->sum('individual_kills');
+                                    $avgKills = $totalMatches > 0 ? number_format($totalKills / $totalMatches, 1) : 0;
+                                    $avgSurvival = 0;
+                                    if ($totalMatches > 0) {
+                                        $avgSurvival = number_format($playerPerformances->avg('individual_survive'), 1);
+                                    }
+                                @endphp
+                                <tr>
+                                    <td>{{ $player->name }}</td>
+                                    <td>{{ $totalMatches }}</td>
+                                    <td>{{ $totalKills }}</td>
+                                    <td>{{ $avgKills }}</td>
+                                    <td>{{ $avgSurvival }}</td>
+                                </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
 
         @else
             <p class="text-center mt-4">Nenhum jogador cadastrado ainda.</p>

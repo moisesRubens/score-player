@@ -77,61 +77,54 @@
         @endif
 
         @if($players->isNotEmpty())
-            <div class="mb-4" style="background-color: white">
-                <div class="table-responsive custom-shadow rounded">
-
-                    <table class="table table-borderless align-middle text-center">
-                        <thead>
-                            <tr>
-                                <th>Nick</th>
-                                <th>MDMs jogados</th>
-                                <th>Adicionar ponto</th>
-                                <th>Editar</th>
-                                <th>Deletar</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @foreach($players as $player)
-                                <tr>
-                                    <td>{{ $player->name }}</td>
-                                    <td>{{ $player->score }}</td>
-                                    <!-- Botão adicionar ponto -->
-                                    <td>
-                                        <form onsubmit="clickSound()" action="{{ route('players.addPoint', $player->id) }}"
-                                            method="POST">
-                                            @csrf
-                                            <button type="submit" class="btn-table btn btn-primary btn-sm">MDM</button>
-                                        </form>
-                                    </td>
-                                    <!-- Botão editar -->
-                                    <td>
-                                        <a href="{{ route('players.edit', $player->id) }}" class=" btn-table bt btn-sm">
-                                            <i><img src="{{ asset('img/pencil.png') }}" alt=""></i>
-                                        </a>
-                                    </td>
-                                    <!-- Botão deletar -->
-                                    <td>
-                                        <form action="{{ route('players.destroy', $player->id) }}" method="POST">
-                                            @csrf
-                                            @method('DELETE')
-                                            <button type="submit" class="btn-table btn btn-sm">
-                                                <i><img src="{{ asset('img/trash.png') }}" alt=""></i>
-                                            </button>
-                                        </form>
-                                    </td>
-                                </tr>
-                            @endforeach
-                        </tbody>
-                    </table>
-                    
-                </div>
-
-            </div>
+            <table class="table table-responsive custom-shadow table-borderless rounded align-middle text-center">
+                <thead>
+                    <tr>
+                        <th>Nick</th>
+                        <th>MDMs jogados</th>
+                        <th>Adicionar ponto</th>
+                        <th>Editar</th>
+                        <th>Deletar</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach($players as $player)
+                        <tr>
+                            <td>{{ $player->name }}</td>
+                            <td>{{ $player->score }}</td>
+                            <!-- Botão adicionar ponto -->
+                            <td>
+                                <form onsubmit="clickSound()" action="{{ route('players.addPoint', $player->id) }}"
+                                    method="POST">
+                                    @csrf
+                                    <button type="submit" class="btn-table btn btn-primary btn-sm">MDM</button>
+                                </form>
+                            </td>
+                            <!-- Botão editar -->
+                            <td>
+                                <a href="{{ route('players.edit', $player->id) }}" class=" btn-table bt btn-sm">
+                                    <i><img src="{{ asset('img/pencil.png') }}" alt=""></i>
+                                </a>
+                            </td>
+                            <!-- Botão deletar -->
+                            <td>
+                                <form action="{{ route('players.destroy', $player->id) }}" method="POST">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button type="submit" class="btn-table btn btn-sm">
+                                        <i><img src="{{ asset('img/trash.png') }}" alt=""></i>
+                                    </button>
+                                </form>
+                            </td>
+                        </tr>
+                    @endforeach
+                </tbody>
+            </table>
         @else
             <p class="text-center mt-4">Nenhum jogador cadastrado ainda.</p>
         @endif
 
-        <div class="mb-3 text-center">
+        <div class="mb-3 mt-4 text-center">
             <a href="{{ route('players.create') }}" class="strong-text btn button btn-primary">Registrar-se</a>
         </div>
     </div>
