@@ -3,6 +3,18 @@ body {
     ;
 }
 
+.table {
+	border-collapse: collapse;
+    width: 100%;
+    border-radius: inherit;
+}
+
+.table-responsive {
+    box-shadow: 4px 4px 12px rgba(0,0,0,0.288);
+    border-radius: 8px; /* arredonda os cantos da div */
+    overflow: hidden; /* garante que a sombra apareça corretamente */
+}
+
 .strong-text {
     font-weight: bold;
 }
