@@ -1,72 +1,98 @@
+body {
+    background-color: #fcfcfc;
+    ;
+}
+
+.table {
+	border-collapse: collapse;
+    width: 100%;
+    border-radius: inherit;
+}
+
+.table-responsive {
+    box-shadow: 4px 4px 12px rgba(0,0,0,0.288);
+    border-radius: 8px; /* arredonda os cantos da div */
+    overflow: hidden; /* garante que a sombra apareça corretamente */
+}
+
+.strong-text {
+    font-weight: bold;
+}
+
+.custom-shadow {
+    box-shadow: 4px 4px 12px rgba(0, 0, 0, 0.288);
+}
+
 img {
     width: 30px;
-    /* Ajuste a largura da imagem */
     height: 30px;
-    /* Ajuste a altura da imagem */
 }
 
 .vz-navbar {
     background-color: #0968E5;
     padding: 0.5rem 0.75rem;
-    /* Uniform padding */
     height: 70px !important;
-    /* Set a consistent height */
 }
 
 .navbar-logo {
-    height: 50px;
-    /* Consistent logo size */
+    height: 56px;
     width: auto;
+}
+
+.menu-icon {
+    height: 36px;
+    width: auto;
+}
+
+.dropdown-toggle::after {
+    display: none !important;
 }
 
 /* Navbar for smaller screens (Mobile) */
 @media (max-width: 768px) {
     .navbar {
         padding: 0.25rem 0.5rem;
-        /* Adjust padding for smaller screens */
         height: 60px !important;
-        /* Slightly smaller height for mobile */
     }
 
     .navbar-logo {
-        height: 40px;
-        /* Smaller logo on mobile */
+        height: 42px;
+    }
+
+    .menu-icon {
+        height: 30px;
     }
 
     img {
         width: 20px;
-        /* Ajuste a largura da imagem */
         height: 20px;
-        /* Ajuste a altura da imagem */
     }
 
-    .button a {
-        display: inline-block;
-        /* Garantir que o botão se comporte como um bloco */
-        width: 170px;
-        /* Garantir que o botão ocupe 100% da largura no mobile */
-        max-width: 250px;
-        /* Defina uma largura máxima */
+    .button {
+        font-size: 12px;
+        padding: 6px 10px;
+        display: block;
+        width: 50%;
         margin: 0 auto;
-        /* Centraliza o botão */
     }
-}
 
-/* Table Styles */
-.table-style tr:last-child td:first-child {
-    border-bottom-left-radius: 12px;
-}
+    .btn-table {
+        font-size: 97%;
+        width: 50px;
+        height: 30px;
+    }
 
-.table-style tr:last-child td:last-child {
-    border-bottom-right-radius: 12px;
-}
+    .mb-3.text-center {
+        display: grid;
+        gap: 8px;
+    }
 
-.table-style tr:first-child th:first-child {
-    border-top-left-radius: 12px;
-}
-
-.table-style tr:first-child th:last-child {
-    border-top-right-radius: 12px;
+    .table-style th,
+    .table-style td {
+        font-size: 12px;
+        padding: 6px 4px;
+        border: none !important;
+    }
 }
 
 .table-style th,
@@ -96,43 +122,6 @@ img {
     background-color: #094EBE;
 }
 
-/* Mobile table adjustments */
-@media(max-width: 768px) {
-
-    .table-style th,
-    .table-style td {
-        font-size: 12px;
-        /* Smaller text for mobile */
-        padding: 6px 4px;
-        /* Adjust padding for smaller screens */
-        border: none !important;
-        /* No borders on mobile */
-    }
-}
-
-/* Button Styles */
-.btn {
-    font-size: 14px;
-    /* Default button text size */
-    padding: 10px 15px;
-    /* Adequate padding for desktop */
-    border-radius: 5px;
-    /* Round button edges */
-}
-
-/* Mobile adjustments */
-@media(max-width: 768px) {
-    .btn {
-        font-size: 12px;
-        /* Smaller font for mobile */
-        padding: 6px 10px;
-        /* Reduced padding */
-        width: 100%;
-        /* Buttons take full width on mobile */
-    }
-}
-
-/* Card Styles */
 .report-card .card-body {
     padding: 0.4rem;
 }
@@ -141,13 +130,6 @@ img {
 .dropdown-toggle::after {
     display: none !important;
     /* Remove default dropdown arrow */
-}
-
-@media (max-width: 768px) {
-    .menu-icon {
-        height: 30px;
-        /* Smaller menu icon on mobile */
-    }
 }
 
 /* Styling for alert messages */
@@ -160,4 +142,26 @@ img {
 .form-select {
     padding: 8px;
     font-size: 14px;
+}
+
+.table th {
+    color: white;
+    font-weight: bold;
+    background-color: #0968E5;
+}
+
+.table tr:last-child td:first-child {
+    border-bottom-left-radius: 8px;
+}
+
+.table tr:last-child td:last-child {
+    border-bottom-right-radius: 8px;
+}
+
+.table th:first-child {
+    border-top-left-radius: 8px;
+}
+
+.table th:last-child {
+    border-top-right-radius: 8px;
 }
