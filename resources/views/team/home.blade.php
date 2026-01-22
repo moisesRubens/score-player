@@ -18,6 +18,12 @@
         .report-card .card-body {
             padding: 0.4rem;
         }
+
+        table tbody tr:first-child td{
+            background: linear-gradient(to top, rgba(228, 167, 0, 0.829), white);
+            font-weight: 500;
+        }
+
     </style>
 </head>
 
@@ -127,38 +133,31 @@
                 </div>
             </div>
 
-                    <table class="table table-responsive custom-shadow rounded align-middle text-center ">
-                        <thead>
-                            <tr>
-                                <th>Nick</th>
-                                <th>Partidas</th>
-                                <th>Kills</th>
-                                <th>Média Kills</th>
-                                <th>Média Sobrevivência</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @foreach($players as $player)
-                                @php
-                                    $playerPerformances = $team->where('player.id', $player->id);
-                                    $totalMatches = $playerPerformances->count();
-                                    $totalKills = $playerPerformances->sum('individual_kills');
-                                    $avgKills = $totalMatches > 0 ? number_format($totalKills / $totalMatches, 1) : 0;
-                                    $avgSurvival = 0;
-                                    if ($totalMatches > 0) {
-                                        $avgSurvival = number_format($playerPerformances->avg('individual_survive'), 1);
-                                    }
-                                @endphp
-                                <tr>
-                                    <td>{{ $player->name }}</td>
-                                    <td>{{ $totalMatches }}</td>
-                                    <td>{{ $totalKills }}</td>
-                                    <td>{{ $avgKills }}</td>
-                                    <td>{{ $avgSurvival }}</td>
-                                </tr>
-                            @endforeach
-                        </tbody>
-                    </table>
+            <h2 style="text-align: center; margin-bottom: 30px;" >Ranking KD</h2>
+
+            <table class="table table-responsive custom-shadow rounded align-middle text-center ">
+                <thead>
+                    <tr>
+                        <th>Nick</th>
+                        <th>Partidas</th>
+                        <th>Kills</th>
+                        <th>Média Kills</th>
+                        <th>Média Sobrevivência</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach($playersStatus as $data)
+                        <tr>
+                            <td>{{ $data['player']->name }}</td>
+                            <td>{{ $data['matches'] }}</td>
+                            <td>{{ $data['kills'] }}</td>
+                            <td>{{ $data['kills_avg'] }}</td>
+                            <td>{{ $data['survival_avg'] }}</td>
+                        </tr>
+                    @endforeach
+                </tbody>
+
+            </table>
 
         @else
             <p class="text-center mt-4">Nenhum jogador cadastrado ainda.</p>
