@@ -15,34 +15,66 @@ class BattleController extends Controller
      */
     public function index()
     {
-        // Load all performances with related player and battle
-        $team = PlayerPerformance::with(['player', 'battle'])->get();
+        $map = 'todos';
+        $query = PlayerPerformance::with('player');
 
-        // Default map filter
-        $mapa = 'todos';
+        $team = $query->get();
+        
+        $playersStatus = $team
+            ->groupBy('player_id')
+            ->map(function ($performances) {
+                $matches = $performances->count();
+                $kills = $performances->sum('individual_kills');
 
-        // Get unique players from the performances
-        $players = $team->pluck('player')->unique('id');
+                return [
+                    'player' => $performances->first()->player()->first(),
+                    'matches' => $matches,
+                    'kills' => $kills,
+                    'kills_avg' => ($matches > 0) ? round($kills / $matches, 1) : 0,
+                    'survival_avg' => ($matches > 0) ? round($performances->avg('individual_survive'), 1) : 0
+                ];
+            })->sortByDesc('kills_avg')->values();
 
-        $battles = Battle::all();
-        return view('team.home', compact('team', 'mapa', 'players', 'battles'));
+        return view('team.home', [
+            'playersStatus' => $playersStatus,
+            'team' => $team,
+            'battles' => $team,
+            'map' => $map,
+        ]);
     }
 
     public function filterResultsByMap(Request $request)
     {
-        $mapa = $request->query('map', 'todos');
+        $map = $request->query('map', 'todos');
+        $query = PlayerPerformance::with('player');
 
-        // Get performances
-        $team = PlayerPerformance::with(['battle', 'player'])
-            ->when($mapa != 'todos', fn($q) => $q->where('map', $mapa))
-            ->get();
+        if ($map != 'todos') {
+            $query->where('map', $map);
+        }
 
-        $players = $team->pluck('player')->unique('id');
+        $team = $query->get();
+        
+        $playersStatus = $team
+            ->groupBy('player_id')
+            ->map(function ($performances) {
+                $matches = $performances->count();
+                $kills = $performances->sum('individual_kills');
 
-        // Get battles that exist in the performances
-        $battleIds = $team->pluck('match_id')->unique();
-        $battles = Battle::whereIn('id', $battleIds)->get();
-        return view('team.home', compact('team', 'mapa', 'players', 'battles'));
+                return [
+                    'player' => $performances->first()->player()->first(),
+                    'matches' => $matches,
+                    'kills' => $kills,
+                    'kills_avg' => ($matches > 0) ? round($kills / $matches, 1) : 0,
+                    'survival_avg' => ($matches > 0) ? round($performances->avg('individual_survive'), 1) : 0
+                ];
+            })->sortByDesc('kills_avg')->values();
+
+        return view('team.home', [
+            'playersStatus' => $playersStatus,
+            'team' => $team,
+            'battles' => $team,
+            'map' => $map,
+        ]);
     }
 
     /**
@@ -74,7 +106,8 @@ class BattleController extends Controller
 
             foreach ($request->players as $playerData) {
                 $player = Player::find($playerData['id']);
-                if ($playerData['survival_minutes'] < 1) continue; 
+                if ($playerData['survival_minutes'] < 1)
+                    continue;
 
                 $player->kills += $playerData['kills'];
                 $player->average_survive =
@@ -92,7 +125,7 @@ class BattleController extends Controller
                 ]);
             }
             return redirect()->route('partidas.index')->with('success', 'Resultado cadastrado!');
-        } catch(Exception $e) {
+        } catch (Exception $e) {
             return redirect()->route('partidas.create')->with('warning', 'Preencha corretamente os campos');
         }
     }
@@ -100,7 +133,7 @@ class BattleController extends Controller
     /**
      * Filter results by map
      */
-    
+
 
 
 }
