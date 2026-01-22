@@ -20,7 +20,7 @@
         }
 
         table tbody tr:first-child td{
-            background: linear-gradient(to top, rgba(228, 167, 0, 0.829), white);
+            background: linear-gradient(to top, rgba(228, 167, 0, 0.637), white);
             font-weight: 500;
         }
 
@@ -84,10 +84,11 @@
             <div class="row-md-4 mb-4">
                 <label for="filtro-mapa" class="form-label fw-bold">Mapa</label>
                 <select class="form-select" id="filtro-mapa" name="map" onchange="this.form.submit()">
-                    <option value="erangel" {{ ($mapa ?? '') == 'erangel' ? 'selected' : '' }}>Erangel</option>
-                    <option value="miramar" {{ ($mapa ?? '') == 'miramar' ? 'selected' : '' }}>Miramar</option>
-                    <option value="rondo" {{ ($mapa ?? '') == 'rondo' ? 'selected' : '' }}>Rondo</option>
-                    <option value="todos" {{ ($mapa ?? '') == 'todos' ? 'selected' : '' }}>Todos</option>
+                    <option value="erangel" {{ ($map ?? '') == 'erangel' ? 'selected' : '' }}>Erangel</option>
+                    <option value="miramar" {{ ($map ?? '') == 'miramar' ? 'selected' : '' }}>Miramar</option>
+                    <option value="rondo" {{ ($map ?? '') == 'rondo' ? 'selected' : '' }}>Rondo</option>
+                    <option value="todos" {{ ($map ?? '') == 'todos' ? 'selected' : '' }}>Todos</option>
+
                 </select>
             </div>
         </form>
