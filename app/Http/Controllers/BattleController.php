@@ -17,7 +17,7 @@ class BattleController extends Controller
     {
         $map = 'todos';
         $query = PlayerPerformance::with('player');
-
+        $battle = ($map == 'todos') ?Battle::all() :Battle::where('map', $map)->get();
         $team = $query->get();
         
         $playersStatus = $team
@@ -38,7 +38,7 @@ class BattleController extends Controller
         return view('team.home', [
             'playersStatus' => $playersStatus,
             'team' => $team,
-            'battles' => $team,
+            'battles' => $battle,
             'map' => $map,
         ]);
     }
@@ -47,6 +47,7 @@ class BattleController extends Controller
     {
         $map = $request->query('map', 'todos');
         $query = PlayerPerformance::with('player');
+        $battle = ($map == 'todos') ?Battle::all() :Battle::where('map', $map)->get();
 
         if ($map != 'todos') {
             $query->where('map', $map);
@@ -72,7 +73,7 @@ class BattleController extends Controller
         return view('team.home', [
             'playersStatus' => $playersStatus,
             'team' => $team,
-            'battles' => $team,
+            'battles' => $battle,
             'map' => $map,
         ]);
     }

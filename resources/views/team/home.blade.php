@@ -99,7 +99,7 @@
                 $totalMatches = count($battles);
                 $totalKills = $team->sum('individual_kills');
                 $avgKills = $totalMatches > 0 ? number_format($totalKills / $totalMatches, 1) : 0;
-                $avgSurvival = 6;
+                $avgSurvival = 0;
                 if ($totalMatches > 0) {
                     $avgSurvival = number_format($battles->avg('survive_time'), 1);
                 }
