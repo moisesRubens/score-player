@@ -24,6 +24,13 @@ class PlayerController extends Controller
         return view ('create');
     }
 
+
+    public function login(Request $request) {
+        if($request->input('password') != 'oia') {
+            return redirect()->route('players.login')->with('warning', 'Senha inválida');
+        }
+        return redirect()->route('players.index');
+    }
     /**
      * Store a newly created resource in storage.
      */

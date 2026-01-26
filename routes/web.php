@@ -4,9 +4,12 @@ use App\Http\Controllers\PlayerController;
 use App\Http\Controllers\BattleController;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', [PlayerController::class, 'index'])->name('players.index');
+Route::get('/', function(){ return view('login'); });
 
 Route::prefix('players')->group(function () {
+    Route::post('/login', [PlayerController::class, 'login'])->name('players.login');
+    Route::get('/login', function(){ return view('login'); })->name('players.login');
+    Route::get('/', [PlayerController::class, 'index'])->name('players.index');
     Route::get('/create', [PlayerController::class, 'create'])->name('players.create');
     Route::post('/', [PlayerController::class, 'store'])->name('players.store');
     Route::get('/{player}/edit', [PlayerController::class, 'edit'])->name('players.edit');

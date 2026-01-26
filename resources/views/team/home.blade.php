@@ -88,7 +88,6 @@
                     <option value="miramar" {{ ($map ?? '') == 'miramar' ? 'selected' : '' }}>Miramar</option>
                     <option value="rondo" {{ ($map ?? '') == 'rondo' ? 'selected' : '' }}>Rondo</option>
                     <option value="todos" {{ ($map ?? '') == 'todos' ? 'selected' : '' }}>Todos</option>
-
                 </select>
             </div>
         </form>
