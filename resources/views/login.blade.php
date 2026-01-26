@@ -129,6 +129,7 @@
         <form action="{{ route('players.login') }}" method="post">
             @csrf
             <div class="mb-3 mt-4 text-center">
+                <input type="text" name="nick" required>
                 <input type="password" name="password" required>
                 <button class="strong-text btn button btn-primary">Login</button>
             </div>

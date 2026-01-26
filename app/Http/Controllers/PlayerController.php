@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use App\Models\Player;
 
 class PlayerController extends Controller
@@ -26,10 +27,16 @@ class PlayerController extends Controller
 
 
     public function login(Request $request) {
-        if($request->input('password') != 'oia') {
+        if(Auth::check()) {
+            return redirect()->route('players.index');
+        }
+
+        $player = Player::where('name', $request->input('nick'))->first();
+
+        if($request->input('password') == 'oia') {
+            Auth::login($player, true);
             return redirect()->route('players.login')->with('warning', 'Senha inválida');
         }
-        return redirect()->route('players.index');
     }
     /**
      * Store a newly created resource in storage.
