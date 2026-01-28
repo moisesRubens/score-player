@@ -127,7 +127,7 @@
         @endif
 
         <div class="mb-3 mt-4 text-center">
-            <a href="{{ route('players.create') }}" class="strong-text btn button btn-primary">Registrar-se</a>
+            <a href="{{ route('players_create') }}" class="strong-text btn button btn-primary">Registrar-se</a>
         </div>
     </div>
 

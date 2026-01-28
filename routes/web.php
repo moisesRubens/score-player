@@ -9,7 +9,7 @@ Route::get('/', [PlayerController::class, 'viewLogin'])->name('viewLogin');
 Route::prefix('players')->group(function () {
     Route::post('/login', [PlayerController::class, 'login'])->name('login');
     Route::get('/', [PlayerController::class, 'index'])->name('players.index');
-    Route::get('/create', [PlayerController::class, 'create'])->name('players.create');
+    Route::get('/create', [PlayerController::class, 'create'])->name('players_create');
     Route::post('/', [PlayerController::class, 'store'])->name('players.store');
     Route::get('/{player}/edit', [PlayerController::class, 'edit'])->name('players.edit');
     Route::put('/{player}', [PlayerController::class, 'update'])->name('players.update');
