@@ -10,7 +10,6 @@
     <link rel="stylesheet" href="{{ asset('css/style.css') }}">
 
     <style>
-        /* GENERAL FIXES */
         body {
             min-height: 100vh;
         }
@@ -21,7 +20,6 @@
             padding-right: 16px;
         }
 
-        /* NAVBAR */
         .vz-navbar {
             padding: 0.75rem 1rem;
         }
@@ -31,7 +29,6 @@
             width: auto;
         }
 
-        /* LOGIN FORM */
         form {
             display: flex;
             justify-content: center;
@@ -42,11 +39,10 @@
             max-width: 360px;
         }
 
-        input[type="password"] {
+        input {
             width: 100%;
             padding: 10px;
             font-size: 16px;
-            /* prevents zoom on mobile */
             border-radius: 6px;
             margin-bottom: 12px;
         }
@@ -55,7 +51,6 @@
             width: 100%;
         }
 
-        /* ALERT */
         .alert {
             width: 100%;
             max-width: 360px;
@@ -63,7 +58,6 @@
             font-size: 14px;
         }
 
-        /* SMALL DEVICES */
         @media (max-width: 576px) {
             .container {
                 padding-top: 2rem;
@@ -78,7 +72,6 @@
             }
         }
 
-        /* TABLE SAFETY (future-proof) */
         @media (max-width: 768px) {
             table {
                 font-size: 14px;
@@ -127,17 +120,17 @@
         @endif
 
         <form action="{{ route('login') }}" method="POST">
-            @csrf
-            <div class="mb-3 mt-4 text-center">
-                <input type="text" name="nick" required>
-                <input type="password" name="password" required>
-                <button class="strong-text btn button btn-primary">Login</button>
-            </div>
-        </form>
-    </div>
+                @csrf
+                <div class="mt-4 text-center">
+                    <input class="mb-3" type="text" name="nick" required placeholder="nick">
+                        <input class="mb-3" type="password" name="password" required placeholder="senha">
+                            <button class="mb-3 strong-text btn button btn-primary">Login</button>
+                        </div>
+                    </form>
+                </div>
 
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+                <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 
 
 </body>
