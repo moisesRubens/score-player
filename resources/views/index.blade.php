@@ -41,6 +41,9 @@
                             <a class="dropdown-item" href="{{ route('partidas.index') }}">
                                 Time
                             </a>
+                            <a class="dropdown-item" href="{{ route('logout') }}">
+                                Logout
+                            </a>
                         </li>
                     </ul>
                 </div>

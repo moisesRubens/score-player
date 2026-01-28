@@ -4,11 +4,10 @@ use App\Http\Controllers\PlayerController;
 use App\Http\Controllers\BattleController;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', function(){ return view('login'); });
+Route::get('/', [PlayerController::class, 'viewLogin'])->name('viewLogin');
 
 Route::prefix('players')->group(function () {
-    Route::post('/login', [PlayerController::class, 'login'])->name('players.login');
-    Route::get('/login', function(){ return view('login'); })->name('players.login');
+    Route::post('/login', [PlayerController::class, 'login'])->name('login');
     Route::get('/', [PlayerController::class, 'index'])->name('players.index');
     Route::get('/create', [PlayerController::class, 'create'])->name('players.create');
     Route::post('/', [PlayerController::class, 'store'])->name('players.store');
@@ -18,10 +17,11 @@ Route::prefix('players')->group(function () {
     Route::post('/{player}/add-point', [PlayerController::class, 'addPoint'])->name('players.addPoint');
 });
 
-
 Route::prefix('partidas')->group(function() {
     Route::get('/filter', [BattleController::class, 'filterResultsByMap'])
         ->name('partidas.filterResultsByMap');
 });
+
 Route::resource('partidas', BattleController::class);
 
+Route::match(['get', 'post'], '/logout', [PlayerController::class, 'logOut'])->name('logout');

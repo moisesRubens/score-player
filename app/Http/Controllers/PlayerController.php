@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Player;
+use Session;
 
 class PlayerController extends Controller
 {
@@ -25,19 +26,33 @@ class PlayerController extends Controller
         return view ('create');
     }
 
-
-    public function login(Request $request) {
-        if(Auth::check()) {
+    public function viewLogin(Request $request) {
+        if(Auth::guard('player')->check()) {
             return redirect()->route('players.index');
         }
+        return view('login');
+    }
 
+    public function login(Request $request) {
         $player = Player::where('name', $request->input('nick'))->first();
 
-        if($request->input('password') == 'oia') {
-            Auth::login($player, true);
-            return redirect()->route('players.login')->with('warning', 'Senha inválida');
+        if(!$player) {
+            return redirect()->route('viewLogin')->with('warning', 'Usuário não encontrado');
         }
+        if($request->input('password') != 'oia') {
+            return redirect()->route('viewLogin')->with('warning', 'Senha inválida');
+        }
+        Auth::guard('player')->login($player, true);
+        return redirect()->route('viewLogin');
     }
+
+    public function logOut(Request $request){
+        Auth::guard('player')->logout();
+        Session::flush();
+
+        return redirect()->route('viewLogin');
+    }
+
     /**
      * Store a newly created resource in storage.
      */

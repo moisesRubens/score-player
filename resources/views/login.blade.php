@@ -126,7 +126,7 @@
             </div>
         @endif
 
-        <form action="{{ route('players.login') }}" method="post">
+        <form action="{{ route('login') }}" method="POST">
             @csrf
             <div class="mb-3 mt-4 text-center">
                 <input type="text" name="nick" required>
